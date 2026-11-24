@@ -1,0 +1,8 @@
+name: labkey/java-models
+version: 1.0.0
+library: true
+description: CodeQL models for LabKey Java APIs, applied org-wide to code scanning default setup.
+extensionTargets:
+  codeql/java-all: '*'
+dataExtensions:
+  - models/**/*.yml

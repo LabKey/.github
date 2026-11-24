@@ -1,0 +1,8 @@
+# Each method returns its argument only after checking that it is a well-formed identifier or dotted identifier sequence.
+extensions:
+  - addsTo:
+      pack: codeql/java-all
+      extensible: barrierModel
+    data:
+      - ["org.labkey.api.data", "SQLFragment", false, "checkIdentifier", "(CharSequence)", "", "ReturnValue", "sql-injection", "manual"]
+      - ["org.labkey.api.data", "SQLFragment", false, "requireIdentifierPart", "(CharSequence,boolean)", "", "ReturnValue", "sql-injection", "manual"]

@@ -1,0 +1,28 @@
+name: Publish CodeQL model pack
+
+on:
+  push:
+    branches: [develop]
+    paths: ['codeql/java-models/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install CodeQL CLI
+        run: gh extension install github/gh-codeql
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Publish labkey/java-models
+        working-directory: codeql/java-models
+        # Publishing a version that already exists fails, so bump version in qlpack.yml with each change
+        run: gh codeql pack publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
